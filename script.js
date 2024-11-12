@@ -1,99 +1,130 @@
-let displayValue = '0';
-let firstOperand = null;
-let operator = null;
-let waitingForSecondOperand = false;
-let calculationHistory = []; // Array to store calculation history
-
-// Updates the display
-function updateDisplay() {
-    document.getElementById('display').textContent = displayValue;
-}
-
-// Clears the display and resets all values
-function clearDisplay() {
-    displayValue = '0';
-    firstOperand = null;
-    operator = null;
-    waitingForSecondOperand = false;
-    updateDisplay();
-}
-
-// Removes the last character in the display
-function backspace() {
-    if (displayValue.length > 1) {
-        displayValue = displayValue.slice(0, -1);
-    } else {
-        displayValue = '0';
+document.addEventListener("DOMContentLoaded", () => {
+    const signupForm = document.getElementById("signupForm");
+    const fullName = document.getElementById("fullName");
+    const email = document.getElementById("email");
+    const phone = document.getElementById("phone");
+    const password = document.getElementById("password");
+    const confirmPassword = document.getElementById("confirmPassword");
+    const togglePassword = document.getElementById("togglePassword");
+    const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+  
+    const errors = {
+      nameError: "Name must be at least 10 characters",
+      emailError: "Enter a valid email with '@'",
+      phoneError: "Phone number must be a 10-digit number",
+      passwordError: "Password must be at least 8 characters and cannot be 'password' or your name",
+      confirmPasswordError: "Passwords do not match"
+    };
+  
+    function validateForm() {
+      let isValid = true;
+  
+      // Full Name Validation
+      if (fullName.value.length < 5) {
+        showError("nameError", errors.nameError);
+        isValid = false;
+      } else {
+        clearError("nameError");
+      }
+  
+      // Email Validation
+      if (!email.value.includes("@")) {
+        showError("emailError", errors.emailError);
+        isValid = false;
+      } else {
+        clearError("emailError");
+      }
+  
+      // Phone Number Validation
+      if (phone.value.length !== 10 || phone.value === "1234567890") {
+        showError("phoneError", errors.phoneError);
+        isValid = false;
+      } else {
+        clearError("phoneError");
+      }
+  
+      // Password Validation
+      if (password.value.length < 8 || password.value.toLowerCase() === "password" || password.value === fullName.value) {
+        showError("passwordError", errors.passwordError);
+        isValid = false;
+      } else {
+        clearError("passwordError");
+      }
+  
+      // Confirm Password Validation
+      if (password.value !== confirmPassword.value) {
+        showError("confirmPasswordError", errors.confirmPasswordError);
+        isValid = false;
+      } else {
+        clearError("confirmPasswordError");
+      }
+  
+      return isValid;
     }
-    updateDisplay();
-}
-
-// Adds symbols and numbers to display
-function appendSymbol(symbol) {
-    if (waitingForSecondOperand) {
-        displayValue = symbol;
-        waitingForSecondOperand = false;
-    } else {
-        displayValue = displayValue === '0' ? symbol : displayValue + symbol;
+  
+    function showError(id, message) {
+      document.getElementById(id).innerText = message;
     }
-    updateDisplay();
-}
-
-// Sets operator and prepares for the next input
-function setOperator(op) {
-    if (!waitingForSecondOperand && operator) {
-        calculate();
+  
+    function clearError(id) {
+      document.getElementById(id).innerText = "";
     }
-    operator = op;
-    firstOperand = displayValue;
-    waitingForSecondOperand = true;
-}
-
-// Square operation
-function square() {
-    displayValue = String(Math.pow(parseFloat(displayValue), 2));
-    updateDisplay();
-}
-
-// Square root operation
-function squareRoot() {
-    displayValue = String(Math.sqrt(parseFloat(displayValue)));
-    updateDisplay();
-}
-
-// Evaluates the final result when "=" is pressed
-function calculate() {
-    if (operator && firstOperand !== null) {
-        const secondOperand = parseFloat(displayValue);
-        const firstNum = parseFloat(firstOperand);
-
-        switch (operator) {
-            case '+':
-                displayValue = String(firstNum + secondOperand);
-                break;
-            case '-':
-                displayValue = String(firstNum - secondOperand);
-                break;
-            case '*':
-                displayValue = String(firstNum * secondOperand);
-                break;
-            case '/':
-                displayValue = secondOperand !== 0 ? String(firstNum / secondOperand) : 'Error';
-                break;
-            case '%':
-                displayValue = String(firstNum % secondOperand);
-                break;
-        }
-
-        calculationHistory.push(`${firstOperand} ${operator} ${secondOperand} = ${displayValue}`);
-        operator = null;
-        waitingForSecondOperand = true;
-        updateDisplay();
-    }
-}
-
-// Displays the calculation history
-function showHistory() {
-    const history = calculationHistory.join('\n');
-    alert("Calculation History:\n" + history);
-}
+  
+    signupForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (validateForm()) {
+        alert("Your application is submitted!");
+        signupForm.reset();
+      }
+    });
+  
+    togglePassword.addEventListener("click", () => {
+      password.type = password.type === "password" ? "text" : "password";
+      togglePassword.classList.toggle("fa-eye");
+      togglePassword.classList.toggle("fa-eye-slash");
+    });
+  
+    toggleConfirmPassword.addEventListener("click", () => {
+      confirmPassword.type = confirmPassword.type === "password" ? "text" : "password";
+      toggleConfirmPassword.classList.toggle("fa-eye");
+      toggleConfirmPassword.classList.toggle("fa-eye-slash");
+    });
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("signupForm");
+        const humanCheck = document.getElementById("humanCheck");
+        const humanError = document.getElementById("humanError");
+      
+        form.addEventListener("submit", (event) => {
+          // Reset error message
+          humanError.textContent = "";
+      
+          // Check if "I'm not a robot" is checked
+          if (!humanCheck.checked) {
+            event.preventDefault(); // Prevent form submission
+            humanError.textContent = "Please confirm you're not a robot.";
+          }
+        });
+      
+        // Your existing password toggle logic
+        const passwordField = document.getElementById('password');
+        const confirmPasswordField = document.getElementById('confirmPassword');
+        const togglePassword = document.getElementById('togglePassword');
+        const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+      
+        togglePassword.addEventListener('click', () => {
+          const type = passwordField.type === 'password' ? 'text' : 'password';
+          passwordField.type = type;
+          togglePassword.classList.toggle('fa-eye');
+          togglePassword.classList.toggle('fa-eye-slash');
+        });
+      
+        toggleConfirmPassword.addEventListener('click', () => {
+          const type = confirmPasswordField.type === 'password' ? 'text' : 'password';
+          confirmPasswordField.type = type;
+          toggleConfirmPassword.classList.toggle('fa-eye');
+          toggleConfirmPassword.classList.toggle('fa-eye-slash');
+        });
+      });
+      
+  });
+  

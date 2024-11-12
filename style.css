@@ -1,67 +1,111 @@
-/* Background and overall styling */
+/* General Body Styling */
 body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #f6d365, #b34628);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    font-family: Arial, sans-serif;
+  }
+  
+  /* Container for the form */
+  .container {
     background-color: #ffffff;
-}
-
-.calculator-container {
-    text-align: center;
-}
-
-.calculator-title {
-    font-size: 2em;
-    color: #34495e;
-    margin-bottom: 20px;
-}
-
-/* Calculator styling */
-.calculator {
-    width: 350px;
+    padding: 30px;
     border-radius: 10px;
-    overflow: hidden;
-    background: #ffffff;
-    box-shadow: 6px 6px 12px #c1c3c7, -6px -6px 12px #ffffff;
-}
-
-#display {
-    background-color: #333;
-    color: #f0f0f0;
-    text-align: right;
-    padding: 20px;
-    font-size: 2.5em;
-    overflow-x: auto;
-}
-
-.buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    background-color: #f0f2f5;
-}
-
-button {
-    padding: 20px;
-    font-size: 1.5em;
-    border: 1px solid #ddd;
-    background-color: #ecf0f1;
-    color: #2f3542;
-    transition: background 0.2s, color 0.2s;
-}
-
-button:hover {
-    background-color: #dcdde1;
-    color: #2f3640;
-}
-
-button:nth-child(4n) {
-    background-color: #f39c12;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    border: 2px solid #fda085;
+    box-sizing: border-box;
+  }
+  
+  /* Form Title */
+  h2 {
+    text-align: center;
+    color: #ff6f61;
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+  
+  /* Input Fields Styling */
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  /* Label Styling */
+  label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  /* Input Fields */
+  input[type="text"], input[type="email"], input[type="password"] {
+    width: calc(100% - 40px); /* Adjusted width to accommodate icon */
+    padding: 10px;
+    border: 1px solid #f0f0f0;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-top: 8px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+  }
+  /* Checkbox styling */
+.form-group input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
+  /* Error message styling */
+  #humanError {
+    font-size: 14px;
+    font-weight: 500;
+    color: #ff6f61;
+    display: block;
+    margin-top: 5px;
+  }
+  
+  
+  /* Button Styling */
+  button {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff6f61;
     color: white;
-}
-
-button:nth-child(4n):hover {
-    background-color: #e67e22;
-}
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+ /* Error Message Styling */
+ small {
+    display: block; /* Ensures error messages appear below the input field */
+    font-size: 14px;
+    font-weight: 500;
+    color: #ff6f61;
+    margin-top: 5px;
+  }
+  
+  /* Password container styling */
+  .password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .password-container input[type="password"] {
+    width: 100%;
+    padding-right: 30px; /* Leave space for eye icon */
+  }
+  
+  .toggle-password {
+    position: absolute;
+    right: 30px;
+    font-size: 18px;
+    color: #888;
+    cursor: pointer;
+  }
+  
+  
