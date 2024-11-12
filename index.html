@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h2>Sign Up Form</h2>
+    <form id="signupForm">
+      <!-- Full Name -->
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="fullName" placeholder="Enter Full Name">
+        <small class="text-danger" id="nameError"></small>
+      </div>
+
+      <!-- Email ID -->
+      <div class="form-group">
+        <label for="email">Email ID</label>
+        <input type="email" id="email" name="email" placeholder="Enter Email ID">
+        <small class="text-danger" id="emailError"></small>
+      </div>
+
+      <!-- Gender -->
+      <div class="form-group">
+        <label for="gender">Gender</label><br>
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label>
+        <small class="text-danger" id="genderError"></small>
+      </div>
+
+      <!-- Phone Number -->
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="text" id="phone" name="phone" placeholder="Enter Phone Number">
+        <small class="text-danger" id="phoneError"></small>
+      </div>
+
+        <!-- Password -->
+    <div class="form-group">
+        <label for="password">Password</label>
+        <div class="password-container">
+        <input type="password" id="password" name="password" placeholder="Enter Password">
+        <i class="fas fa-eye toggle-password" id="togglePassword"></i>
+        </div>
+        <small class="text-danger" id="passwordError"></small> <!-- Move this outside of password-container -->
+    </div>
+    
+        <!-- Confirm Password -->
+    <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <div class="password-container">
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password">
+        <i class="fas fa-eye toggle-password" id="toggleConfirmPassword"></i>
+        </div>
+        <small class="text-danger" id="confirmPasswordError"></small> <!-- Move this outside of password-container -->
+    </div>
+
+      <!-- Submit Button -->
+      <button type="submit">Submit</button>
+    </form>
+    <!-- I'm not a robot verification -->
+    <div class="form-group">
+    <label>
+      <input type="checkbox" id="humanCheck" name="humanCheck" required>
+      I'm not a robot
+    </label>
+    <small class="text-danger" id="humanError"></small>
+  </div>
+  
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
